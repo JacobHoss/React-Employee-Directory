@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 function DataTable({ data }) {
     const columns = [
@@ -36,7 +37,7 @@ function DataTable({ data }) {
             case "email":
                 return <td key={idx}>{colObj[colName]}</td>
             case "dob":
-                return <td key={idx}>{colObj[colName].date.slice(0,10)}</td>
+                return <td key={idx}>{colObj[colName].date.slice(0,10).split("-")[1] + "-" + colObj[colName].date.slice(0,10).split("-")[2] + "-" + colObj[colName].date.slice(0,10).split("-")[0] }</td>
             default:
                 return <td></td>
         }
