@@ -1,28 +1,17 @@
 import React from 'react';
-import './App.css';
-import API from './utils/API';
+import Search from './components/Search'
+import Header from './components/Header'
+// import Employee from './components/EmployeeList'
 
 
 function App() {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = event => {
-    setSearchTerm(event.target.value);
-    API.getEmployeeList();
-  };
   return (
-    <div className="App">
-      <input
-        type="text"
-        placeholder="Search"
-        value={searchTerm}
-        onChange={handleChange}
-      />
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-      </ul>
+    <div>
+      <Header />
+      <Search />
+      {/* <Employee /> */}
     </div>
-  );
+  )
 }
 
 export default App;

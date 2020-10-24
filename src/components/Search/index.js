@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import API from '../../utils/API';
 import "./style.css";
 
-function Search(props) {
+function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const handleChange = event => {
     setSearchTerm(event.target.value);
     console.log("Search is firing")
   };
-  const [person, setPerson] = useState(null);
+  const [employee, setEmployee] = useState([]);
 
-    useEffect(async () => {
-      const response = await fetch("https://api.randomuser.me/");
-      const data = await response.json();
-      const [item] = data.results
-      setPerson(item);
+    useEffect(() => {
+      API.getEmployeeList().then(res => {
+        setEmployee(res.data.results);
+      }).catch(err => console.log(err));
     }, []);
+
+    console.log(employee)
 
   return (
     <div className="App">
@@ -24,7 +26,6 @@ function Search(props) {
         value={searchTerm}
         onChange={handleChange}
       />
-      {person && <div>{person.name.first}</div>}
     </div>
   );
 }
