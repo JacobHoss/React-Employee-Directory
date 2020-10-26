@@ -25,6 +25,8 @@ function Search() {
         )
     }
 
+    console.log(employee, "this is the state variable")
+
   return (
     <>
     <div className="md-form mb-3 mt-0">
@@ -37,7 +39,7 @@ function Search() {
       />
     </div>
 
-    <DataTable data={searchFilter([employee])}/>
+    <DataTable data={[employee]}/>
     </>
   );
 }

@@ -2,6 +2,8 @@ import React from "react";
 import "./style.css";
 
 function DataTable({ data }) {
+    console.log(data[0], "this is data[0]")
+
     const columns = [
         {
             name: "picture",
