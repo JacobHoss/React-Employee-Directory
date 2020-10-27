@@ -12,11 +12,6 @@ function Search() {
         setEmployee(res.data.results);
       }).catch(err => console.log(err));
     }, []);
-    console.log(searchFilter(employee), "this is the searched stuff")
-
-    console.log([employee], "this is 1 array") // this console.log is identical to the one below it.
-
-    console.log(searchFilter([employee]), "Does this work?")
 
     function searchFilter(rows) {
       const columns = rows[0] && Object.keys(rows[0])
@@ -24,8 +19,6 @@ function Search() {
         columns.some(column => row[column].toString().toLowerCase().indexOf(query) > -1)
         )
     }
-
-    console.log(employee, "this is the state variable")
 
   return (
     <>
@@ -35,11 +28,17 @@ function Search() {
         type="text"
         placeholder="Search"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          if (e.target.value === "") {
+            
+          } else {
+            setEmployee(searchFilter(employee))
+          }
+        }}
       />
     </div>
-
-    <DataTable data={[employee]}/>
+    <DataTable data={[employee]} />
     </>
   );
 }
