@@ -44,7 +44,7 @@ function DataTable({ data }) {
         }
     }
     return (
-        <table cellPadding={10} cellSpacing={0} className="mx-auto w-auto">
+        <table cellPadding={10} cellSpacing={0} className="mx-auto w-auto table-striped table-bordered table-responsive-sm">
             <thead className="bg-success">
                 <tr>{data[0] && columns.map((col, idx) => <th key={idx}>{col.displayName}</th>)}</tr>
             </thead>

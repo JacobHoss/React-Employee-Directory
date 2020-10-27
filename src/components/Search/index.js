@@ -5,24 +5,26 @@ import DataTable from '../Table'
 
 function Search() {
   const [employee, setEmployee] = useState([]);
+  const [filteredEmployee, setFilteredEmployee] = useState([]);
   const [query, setQuery] = useState("");
 
     useEffect(() => {
       API.getEmployeeList().then(res => {
         setEmployee(res.data.results);
+        setFilteredEmployee(res.data.results);
       }).catch(err => console.log(err));
     }, []);
 
-    function searchFilter(rows) {
-      const columns = rows[0] && Object.keys(rows[0])
-      return rows.filter(row =>
+    function searchFilter(query) {
+      const columns = employee[0] && Object.keys(employee[0])
+      return employee.filter(row =>
         columns.some(column => row[column].toString().toLowerCase().indexOf(query) > -1)
         )
     }
 
   return (
     <>
-    <div className="md-form mb-3 mt-0">
+    <div className="mb-3 mt-0">
       <input
         className="form-control"
         type="text"
@@ -31,14 +33,14 @@ function Search() {
         onChange={(e) => {
           setQuery(e.target.value);
           if (e.target.value === "") {
-            
+            setFilteredEmployee(employee)
           } else {
-            setEmployee(searchFilter(employee))
+            setFilteredEmployee(searchFilter(e.target.value))
           }
         }}
       />
     </div>
-    <DataTable data={[employee]} />
+    <DataTable data={[filteredEmployee]} />
     </>
   );
 }
